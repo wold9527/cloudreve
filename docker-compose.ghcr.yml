@@ -1,0 +1,47 @@
+services:
+  cloudreve:
+    image: ghcr.io/<owner>/<repo>:latest
+    container_name: cloudreve
+    depends_on:
+      - postgresql
+      - redis
+    restart: unless-stopped
+    ports:
+      - "5212:5212"
+      - "6888:6888"
+      - "6888:6888/udp"
+    environment:
+      - TZ=Asia/Shanghai
+      - CR_CONF_Database.Type=postgres
+      - CR_CONF_Database.Host=postgresql
+      - CR_CONF_Database.Port=5432
+      - CR_CONF_Database.User=cloudreve
+      - CR_CONF_Database.Password=cloudreve_password
+      - CR_CONF_Database.Name=cloudreve
+      - CR_CONF_Redis.Server=redis:6379
+    volumes:
+      - cloudreve_data:/cloudreve/data
+
+  postgresql:
+    image: postgres:17
+    container_name: cloudreve-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=cloudreve
+      - POSTGRES_PASSWORD=cloudreve_password
+      - POSTGRES_DB=cloudreve
+    volumes:
+      - cloudreve_postgres:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: cloudreve-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - cloudreve_redis:/data
+
+volumes:
+  cloudreve_data:
+  cloudreve_postgres:
+  cloudreve_redis:

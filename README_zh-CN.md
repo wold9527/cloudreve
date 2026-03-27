@@ -63,6 +63,26 @@
 
 你可以参考 [构建](https://docs.cloudreve.org/overview/build/) 从源代码构建 Cloudreve。
 
+## :whale: GitHub 镜像发布（GHCR）
+
+仓库已内置 GitHub Actions 工作流：`.github/workflows/docker-publish.yml`，用于自动构建并发布 Docker 镜像到 GitHub Container Registry（GHCR）。
+
+- 分支触发：`master` / `main`
+- 标签触发：`v*`
+- 手动触发：`workflow_dispatch`
+- 镜像地址：`ghcr.io/<你的GitHub用户名或组织>/<仓库名>`
+
+发布前请确认：
+
+1. 仓库 `Settings -> Actions -> General -> Workflow permissions` 为 `Read and write permissions`。
+2. 需要公开拉取时，在 GHCR 包设置中将该镜像改为 `public`。
+
+发布后可用以下方式拉取：
+
+```bash
+docker pull ghcr.io/<owner>/<repo>:latest
+```
+
 ## :rocket: 贡献
 
 如果你有兴趣为 Cloudreve 贡献代码，请参考 [贡献](https://docs.cloudreve.org/api/contributing/) 了解如何贡献。

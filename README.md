@@ -62,6 +62,26 @@ When you're ready to deploy Cloudreve to a production environment, you can refer
 
 Please refer to [Build](https://docs.cloudreve.org/overview/build/) for how to build Cloudreve from source code.
 
+## :whale: Docker Publish On GitHub (GHCR)
+
+This repository includes a GitHub Actions workflow at `.github/workflows/docker-publish.yml` to build and publish Docker images to GitHub Container Registry (GHCR).
+
+- Branch trigger: `master` / `main`
+- Tag trigger: `v*`
+- Manual trigger: `workflow_dispatch`
+- Image name: `ghcr.io/<owner>/<repo>`
+
+Before publishing, make sure:
+
+1. `Settings -> Actions -> General -> Workflow permissions` is set to `Read and write permissions`.
+2. Set the package visibility to `public` in GHCR package settings if public pull is required.
+
+After publish:
+
+```bash
+docker pull ghcr.io/<owner>/<repo>:latest
+```
+
 ## :rocket: Contributing
 
 If you're interested in contributing to Cloudreve, please refer to [Contributing](https://docs.cloudreve.org/api/contributing/) for how to contribute to Cloudreve.

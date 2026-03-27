@@ -1,0 +1,22 @@
+.git
+.github
+.idea
+.vscode
+data
+dist
+tmp
+uploads
+*.md
+LICENSE
+SECURITY.md
+README.md
+README_zh-CN.md
+azure-pipelines.yml
+docker-compose.yml
+
+# Build context only needs runtime files + built binary
+!.build
+!.build/aria2.supervisor.conf
+!.build/entrypoint.sh
+!Dockerfile
+!cloudreve
