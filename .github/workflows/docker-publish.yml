@@ -34,8 +34,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "yarn"
-          cache-dependency-path: assets/yarn.lock
 
       - name: Build frontend assets zip for embed
         run: |
